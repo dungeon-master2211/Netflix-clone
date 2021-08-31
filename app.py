@@ -66,4 +66,5 @@ def search():
         sr=requests.get(slink).json()
         return render_template('search.html',sr=sr)
 
-app.run(debug=True)
+if __name__ =='__main__':
+    app.run()
