@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Netflix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static',filename='main.css')}}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static',filename='bootstrap.min.css')}}" />
+    <!--<script src="main.js"></script>-->
+
+</head>
+<body style='background-color:#000;'>
+    <div class="hero-show">
+        <div class="hero-image"  style="background-image:url({{ilink}});">
+                <form action="/search" method="POST">
+                    <input type="text" name="movie-search" placeholder="search movies" class="search-input"/>
+                    <button type="submit" class="btn btn-danger">Search</button>
+                </form>
+                <h2 class="hero-text">{{hname}}</h2>
+                <p class="hero-description">{{hero.overview}}</p>
+                <h1 class="hero-vote">Vote:- {{hero.vote_average}}</h1>
+                <a href="/trailer/{{hero.id}}" class="trailer-l" style="margin-left:2%;">Watch Trailer</a>
+        </div>   
+    </div>
+    
+    <div class="row row-cols-1 row-cols-md-6 mcard" style="margin-right: 0px;margin-left: 0px;">
+        {% for i in range(1,7) %}
+            <div class="col mb-6 trending-card " style="padding-left:5px;padding-right: 5px;">
+                <div class="card h-100" style="background:#000;">    
+                {% if all_show[i].media_type=="tv" %}
+                    
+                        <div class="tr-im" style="background-image:url(https://image.tmdb.org/t/p/w500{{all_show[i].backdrop_path}});"></div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{all_show[i].original_name}}</h5>
+                            <h6>Vote: {{all_show[i].vote_average}}/10</h6>
+                            <a href="#" data-target="#vid-modal" data-toggle="modal" class="trailer-l">Watch Trailer</a>
+
+                        </div>    
+                    
+                {% endif %}
+                {% if all_show[i].media_type=="movie" %}
+                        
+                        <div class="tr-im" style="background-image:url(https://image.tmdb.org/t/p/w500{{all_show[i].backdrop_path}});"></div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{all_show[i].title}}</h4>
+                            <h6>Vote: {{all_show[i].vote_average}}/10</h6>
+                            <a href="/trailer/{{all_show[i].id}}" class="trailer-l">Watch Trailer</a>
+                        </div>    
+                    
+                {% endif %}
+                </div>
+            </div> 
+        {% endfor %}
+    </div>    
+    <h1 class="mtitle">Action Movies</h1>
+    <div class="row row-cols-1 row-cols-md-6 mcard" style="margin-right: 0px;margin-left: 0px;">
+        {% for i in range(0,6) %}
+            <div class="col mb-6 trending-card " style="padding-left:5px;padding-right: 5px;">
+                <div class="card h-100" style="background:#000;">  
+
+                    <div class="tr-im" style="background-image:url(https://image.tmdb.org/t/p/w500{{action_all[i].backdrop_path}});"></div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{action_all[i].original_title}}</h4>
+                        <h6>Vote: {{action_all[i].vote_average}}/10</h6>
+                        <a href="/trailer/{{action_all[i].id}}" class="trailer-l">Watch Trailer</a>
+                    </div>    
+                </div>    
+                       
+            </div> 
+        {% endfor %}
+    </div>    
+    <h1 class="mtitle">Comedy Movies</h1>
+    <div class="row row-cols-1 row-cols-md-6 mcard" style="margin-right: 0px;margin-left: 0px;">
+            {% for i in range(0,6) %}
+                <div class="col mb-6 trending-card " style="padding-left:5px;padding-right: 5px;">
+                    <div class="card h-100" style="background:#000;">  
+    
+                        <div class="tr-im" style="background-image:url(https://image.tmdb.org/t/p/w500{{comedy_all[i].backdrop_path}});"></div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{comedy_all[i].original_title}}</h4>
+                            <h6>Vote: {{comedy_all[i].vote_average}}/10</h6>
+                            <a href="/trailer/{{comedy_all[i].id}}" class="trailer-l">Watch Trailer</a>
+                        </div>    
+                    </div>    
+                           
+                </div> 
+            {% endfor %}
+        </div>    
+    <h1 class="mtitle">Sci-Fi</h1>
+    <div class="row row-cols-1 row-cols-md-6 mcard" style="margin-right: 0px;margin-left: 0px;">
+            {% for i in range(0,6) %}
+                <div class="col mb-6 trending-card " style="padding-left:5px;padding-right: 5px;">
+                    <div class="card h-100" style="background:#000;">  
+    
+                        <div class="tr-im" style="background-image:url(https://image.tmdb.org/t/p/w500{{sci_all[i].backdrop_path}});"></div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{sci_all[i].original_title}}</h4>
+                            <h6>Vote: {{sci_all[i].vote_average}}/10</h6>
+                            <a href="/trailer/{{sci_all[i].id}}" class="trailer-l">Watch Trailer</a>
+                        </div>    
+                    </div>    
+                           
+                </div> 
+            {% endfor %}
+        </div> 
+    <h1 class="mtitle">Family Movies</h1>
+    <div class="row row-cols-1 row-cols-md-6 mcard" style="margin-right: 0px;margin-left: 0px;">
+            {% for i in range(0,6) %}
+                <div class="col mb-6 trending-card " style="padding-left:5px;padding-right: 5px;">
+                    <div class="card h-100" style="background:#000;">  
+    
+                        <div class="tr-im" style="background-image:url(https://image.tmdb.org/t/p/w500{{family_all[i].backdrop_path}});"></div>
+                        <div class="card-body">
+                            <h4 class="card-title">{{family_all[i].original_title}}</h4>
+                            <h6>Vote: {{family_all[i].vote_average}}/10</h6>
+                            <a href="/trailer/{{family_all[i].id}}" class="trailer-l">Watch Trailer</a>
+                        </div>    
+                    </div>    
+                           
+                </div> 
+            {% endfor %}
+        </div>
+    <div class="modal fade" tabindex="-1" id="vid-modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p></p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+     
+    <div class="footer">
+        Made with &hearts; by Harshit
+    </div>
+
+        
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {%if stype=="movie"%}
+        <title>{{show.original_title}}</title>
+    {%endif%}
+    {%if stype=="tv"%}
+        <title>{{show.original_name}}</title>
+    {%endif%}    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static',filename='trailer.css')}}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{{url_for('static',filename='bootstrap.min.css')}}" />
+    <script src="main.js"></script>
+</head>
+<body style="background-color: black;">
+    <div class="container">
+        <iframe class="responsive-iframe" src="https://www.youtube.com/embed/{{tr.key}}?autoplay=1&mute=1" style="margin-right:0;"></iframe>
+    </div>
+    {%if stype=="movie"%}
+        <h1 class="movie-title">{{show.original_title}}</h1> 
+        <h4 class="movie-title">{{show.tagline}}</h4> 
+    {%endif%}
+    {%if stype=="tv"%}
+        <h1 class="movie-title">{{show.original_name}}</h1> 
+        <h4 class="movie-title">Number of Episodes: {{show.number_of_episodes}}</h4> 
+        <h4 class="movie-title">Number of Seasons: {{show.number_of_seasons}}</h4>
+    {%endif%} 
+    <h4 class="movie-title">{{show.overview}}</h4>
+    <h4 class="movie-title">Vote: {{show.vote_average}}</h4>
+
+        
+    
+</body>
+</html>
